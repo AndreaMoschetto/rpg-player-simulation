@@ -1,4 +1,4 @@
-public class Player {
+public class Player extends EventSubject{
     private static Player instance = null;
     
     private float maxHealth;
@@ -17,6 +17,7 @@ public class Player {
 
 
     private Player(){
+        super();
         setMode(new Normal());
     }
 
@@ -27,11 +28,17 @@ public class Player {
     }
 
     public void setMode(PlayerManager newState){
+        updateAll();
         currentState = newState;
         currentState.onEnterState();
     }
 
-
+    public String getStateName(){
+        return currentState.getStateName();
+    }
+    public void punisherOn(){
+        setMode(new Punisher());
+    }
 
     public float getCurrentAttack(){
         return currentAttack;
