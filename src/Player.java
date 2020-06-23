@@ -1,6 +1,9 @@
 public class Player extends EventSubject{
     private static Player instance = null;
     
+    private Inventory inventory;
+    private Shop shop;
+
     private float maxHealth;
     private float currentHealth;
     private float baseAttack;
@@ -13,11 +16,10 @@ public class Player extends EventSubject{
 
     private PlayerManager currentState;
 
-    //TODO: PlayerManager Dependence
-
-
     private Player(){
         super();
+        inventory = Inventory.getInstance();
+        shop = Shop.getInstance();
         setMode(new Normal());
     }
 
@@ -38,6 +40,50 @@ public class Player extends EventSubject{
     }
     public void punisherOn(){
         setMode(new Punisher());
+    }
+
+    public void buySpell(int spellKey){
+        inventory.storeSpell(shop.getSpell(spellKey));
+    }
+    public void equipSpell(int position){
+        inventory.equipSpell(position);
+        updateAttackAmount();
+    }
+    public void attack(){
+        currentState.attack();
+    }
+    public void takeDamage(int amount){
+        currentState.takeDamage(amount);
+    }
+
+    public void heal(float amount){
+        currentState.heal(amount);
+    }
+
+    private void updateAttackAmount(){
+        currentAttack = baseAttack + inventory.getEquippedAmount();
+    }
+
+    public void printShopSpells(){
+        shop.printSpells();
+    }
+
+    public void printStoredSpells(){
+        inventory.printSpells();
+    }
+
+    public void printStats(){
+        System.out.println(
+            "STATISTICHE DI VALOROSO: \n" + 
+            "Salute massima:\t\t" + maxHealth +
+            "\nSalute attuale:\t\t" + currentHealth +
+            "\nAttacco di base:\t\t" + baseAttack +
+            "\nAttacco attuale:\t\t" + currentAttack +
+            "\nResistenza di base:\t\t" + baseResistence +
+            "\nResistenza attuale:\t\t" + currentResistence +
+            "\nSpell equipaggiata:\t\t" + inventory.getEquippedSpellName() +
+            "\nStato: \t\t" + currentState.getStateName()
+        );
     }
 
     public float getCurrentAttack(){

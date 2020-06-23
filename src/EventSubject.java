@@ -15,7 +15,10 @@ public class EventSubject {
             observers.remove(observer);
     }
     protected void updateAll(){
-        observers.stream()
-            .forEach(EventObserver::update);
+        //observers.stream()
+            //.forEach(EventObserver::update);
+        if(!observers.isEmpty())
+            for(EventObserver o : observers)
+                o.update();
     }
 }

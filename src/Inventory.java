@@ -19,13 +19,22 @@ public class Inventory {
     }
 
     public void equipSpell(int position){
-        if(!spells.isEmpty())
-            equippedSpellIndex = position;
+        if(position <= spells.size()){
+            if(spells.get(position-1).isUsable()){
+                equippedSpellIndex = position-1;
+                System.out.println("Valoroso equipaggia: " + getEquippedSpellName());
+            }
+            else{
+                System.out.println("Spell passiva, NON EQIPAGGIABILE");
+            }
+        }
     }
 
     public void storeSpell(Spell spell){
-        if(isNotFull())
+        if(isNotFull()){
             spells.add(spell);
+            System.out.println("Valoroso conserva: " + spell.getName() + " nell'Inventario");
+        }
         else
             System.out.println("INVENTARIO PIENO, Valoroso lascia perdere la spell");
     }
@@ -34,12 +43,16 @@ public class Inventory {
         return spells.get(equippedSpellIndex).getAmount();
     }
 
+    public String getEquippedSpellName(){
+        return spells.get(equippedSpellIndex).getName();
+    }
+
     private boolean isNotFull(){
         return spells.size() < maxSize;
     }
 
     public void printSpells(){
-        System.out.println("L'inventario contiene:\n");
+        System.out.println("Spell in Inventario:\n");
 
         for(int i=0;i<maxSize;i++){
             System.out.print("[" + (i+1) + "]");
@@ -48,5 +61,6 @@ public class Inventory {
             else
                 System.out.println("-empty-");
         }
+
     }
 }

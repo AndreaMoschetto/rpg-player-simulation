@@ -1,5 +1,10 @@
 public class Normal implements PlayerManager{
     String stateName = "Normal";
+    Player player;
+    
+    public Normal(){
+        player = Player.getInstance();
+    }
 
     @Override
     public String getStateName() {
@@ -8,10 +13,10 @@ public class Normal implements PlayerManager{
 
     @Override
     public void onEnterState(){
-        float baseResistence = Player.getInstance().getBaseResistence();
-        Player.getInstance().setCurrentResistence(baseResistence);
-        Player.getInstance().setAttackMultiplyer(1);
-        Player.getInstance().setResistenceMultiplyer(1);
+        //float baseResistence = Player.getInstance().getBaseResistence();
+        // Player.getInstance().setCurrentResistence(baseResistence);
+        // Player.getInstance().setAttackMultiplyer(1);
+        // Player.getInstance().setResistenceMultiplyer(1);
     }
 
     @Override
