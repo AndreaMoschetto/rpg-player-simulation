@@ -1,6 +1,8 @@
 public class ScreenStateNotifyer implements EventObserver{
     private static ScreenStateNotifyer instance;
-    private ScreenStateNotifyer(){}
+    private ScreenStateNotifyer(){
+        Player.getInstance().attach(this);
+    }
 
     public static ScreenStateNotifyer ScreenStateNotifyer(){
         if(null == instance)
