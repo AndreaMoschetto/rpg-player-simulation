@@ -1,10 +1,8 @@
 public class Dead implements PlayerManager{
-
+    String stateName = "Dead";
     @Override
     public String getStateName() {
-        // TODO Auto-generated method stub
-        return null;
-        
+        return stateName;
     }
     @Override
     public void onEnterState(){
@@ -12,26 +10,26 @@ public class Dead implements PlayerManager{
     }
 
     @Override
-    public void takeDamage(int amount) {
-        // TODO Auto-generated method stub
+    public void takeDamage(float amount) {
+        System.out.println("Sarebbe irrispettoso nei confronti del suo spirito");
         return;
     }
 
     @Override
-    public void heal(int amount) {
-        // TODO Auto-generated method stub
+    public void heal(float amount) {
+        System.out.println("Troppo tardi per delle cure");
         return;
     }
 
     @Override
     public void attack() {
-        // TODO Auto-generated method stub
+        System.out.println("I fantasmi non sono cattivi in questo gioco");
         return;
     }
 
     @Override
     public void kill() {
-        // TODO Auto-generated method stub
+        System.out.println("\"Uccidetelo a morte!!\" dicevano");
         return;
     }
     
