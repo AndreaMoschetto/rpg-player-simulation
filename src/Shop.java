@@ -41,6 +41,7 @@ public class Shop {
             "[3] Ice Blow\n"    +
             "[4] Resurrection Talisman"
         );
+        
         //TODO: move it inside Main Class
         System.out.println("(Scegline una digitando il numero corrispondente e premi [invio])\n: ");
     }
