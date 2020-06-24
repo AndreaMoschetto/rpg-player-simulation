@@ -3,20 +3,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-    private static Player player;
-    //private static ScreenStateNotifyer notifyer;
+    private static Player player = Player.getInstance();
+    private static ScreenStateNotifyer notifyer = ScreenStateNotifyer.getInstance();
 
     public static void main(String[] args) {
-        player = Player.getInstance();
-        //notifyer = ScreenStateNotifyer.getInstance();
-        //printTitle();
-        //printShopMenu();
-        //printPlayerMenu();
+        printTitle();
+        printShopMenu();
+        printPlayerMenu();
     }
 
     private static void printTitle() {
         System.out.println("BENVENUTO!!\n" + "Stai per vivere le avventure del guerriero Valoroso...\n"
-                + "(Valoroso è proprio il nome del guerriero)");
+                + "(la \"V\" e' maiuscola perche' \"Valoroso\" e' il suo nome)");
     }
 
     private static void printShopOption() {
@@ -46,24 +44,40 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             int selection = -1;
             printShopOption();
-            System.out.println("(Scegline una digitando il numero corrispondente e premi [invio])\n: ");
+            System.out.print("(Scegline una digitando il numero corrispondente e premi [invio])\n: ");
             selection = userInput();
+            if(selection < 1 || selection > 4){
+                System.out.println("ERRORE: Opzione inesistente");
+                i--;
+                continue;
+            }
             player.buySpell(selection);
         }
     }
 
     private static void printPlayerMenu(){
         System.out.println("Adesso scegli una tra le opzioni disponibili:");
-        printPlayerOptions();
+        
         boolean wantsToPlay = true; 
         
         while(wantsToPlay){
+            printPlayerOptions();
+            System.out.print(": ");
             int selection = userInput();
+            if(selection < 1 || selection > 6){
+                System.out.println("ERRORE: Opzione inesistente");
+                continue;
+            }
             switch(selection){
             case 1:
                 System.out.println("Scegli quale spell equipaggiare: ");
                 printInventoryOptions();
+                System.out.print(": ");
                 int position = userInput();
+                if(position < 1 || position > 3){
+                    System.out.println("ERRORE: Opzione inesistente");
+                    break;
+                }
                 player.equipSpell(position);
                 break;
             case 2:
@@ -89,14 +103,18 @@ public class Main {
         BufferedReader tastiera = new BufferedReader(input);
 
         String text = null;
+        int num = -1;
         try {
             text = tastiera.readLine();
+            num = Integer.parseInt(text);
         } catch (IOException e) {
-            e.printStackTrace();
-            //System.out.println("Tasto non riconosciuto");
+            System.out.println("ERRORE: errore di input");
+            return -1;
+        } catch (NumberFormatException e1){
+            System.out.println("ERRORE: sono ammessi solo numeri");
+            return -2;
         }
 
-        int num = Integer.parseInt(text);
         return num;
     }
 }

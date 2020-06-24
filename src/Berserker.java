@@ -1,6 +1,14 @@
 public class Berserker implements PlayerManager{
     String stateName = "Berserker";
 
+
+    @Override
+    public void equipSpell(int position){
+        Player.getInstance().equipSpellInInventory(position);
+        Player.getInstance().updateAttackAmount();
+        Player.getInstance().updateEquippedSpellName();
+    }
+
     @Override
     public String getStateName() {
         return stateName;
@@ -20,14 +28,11 @@ public class Berserker implements PlayerManager{
         float reducedHealth = 
             Player.getInstance().getCurrentHealth() - 
             amount + totalResistence;
-        System.out.println("A Valoroso vengono inflitti" + amount + "danni");
+        System.out.println("A Valoroso vengono inflitti " + amount + " danni");
         System.out.println("Ne subisce " + (amount - totalResistence));
 
         if(reducedHealth <= 0){
             kill();
-        }
-        else if(reducedHealth < (Player.getInstance().getMaxHealth()/3)){
-            Player.getInstance().setMode(new Berserker()); 
         }
         else{
             Player.getInstance().setCurrentHealth(reducedHealth);
@@ -37,7 +42,7 @@ public class Berserker implements PlayerManager{
 
     @Override
     public void heal(float amount) {
-        System.out.println("Valoroso si cura di:" + amount + "punti");
+        System.out.println("Valoroso si cura di: " + amount + " punti");
         float increasedHealth = Player.getInstance().getCurrentHealth() + amount;
         float maxHealth = Player.getInstance().getMaxHealth();
         if(increasedHealth > maxHealth){
@@ -55,7 +60,7 @@ public class Berserker implements PlayerManager{
     @Override
     public void attack() {
         System.out.println(
-            "Valoroso devasta con: " + Player.getInstance().getSpellName()  +
+            "Valoroso devasta con: " + Player.getInstance().getEquippedSpellName()  +
             "\nInfligge: " + (Player.getInstance().getCurrentAttack() * Player.getInstance().getAttackMultiplyer()) + " danni."
             );
         return;

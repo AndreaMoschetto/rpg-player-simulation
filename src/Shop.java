@@ -36,10 +36,10 @@ public class Shop {
     public void printSpells(){
         System.out.println( 
             "Le Spell disponibili in negozio sono:\n" +
-            "[1] Fire Ball\n"   +
-            "[2] Fire Storm\n"  +
-            "[3] Ice Blow\n"    +
-            "[4] Resurrection Talisman"
+            "[1] Fire Ball (DANNO: 60)\n"   +
+            "[2] Fire Storm (DANNO: 100)\n"  +
+            "[3] Ice Blow (DANNO: 90)\n"    +
+            "[4] Resurrection Talisman (PASSIVA)"
         );
     }
 }

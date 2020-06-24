@@ -19,7 +19,7 @@ public class Inventory {
     }
 
     public void equipSpell(int position){
-        if(position <= spells.size()){
+        if(position <= maxSize){
             if(spells.get(position-1).isUsable()){
                 equippedSpellIndex = position-1;
                 System.out.println("Valoroso equipaggia: " + getEquippedSpellName());
@@ -40,11 +40,15 @@ public class Inventory {
     }
 
     public int getEquippedAmount(){
-        return spells.get(equippedSpellIndex).getAmount();
+        if(equippedSpellIndex > -1)
+            return spells.get(equippedSpellIndex).getAmount();
+            return 0;
     }
 
     public String getEquippedSpellName(){
-        return spells.get(equippedSpellIndex).getName();
+        if(equippedSpellIndex > -1)
+            return spells.get(equippedSpellIndex).getName();
+        return "niente";
     }
 
     private boolean isNotFull(){
@@ -56,11 +60,7 @@ public class Inventory {
 
         for(int i=0;i<maxSize;i++){
             System.out.print("[" + (i+1) + "]");
-            if(spells.size() < i-1)
-                System.out.println(spells.get(i).getName());
-            else
-                System.out.println("-empty-");
+            System.out.println(spells.get(i).getName() + " (DANNO: " + spells.get(i).getAmount() + ")");
         }
-
     }
 }

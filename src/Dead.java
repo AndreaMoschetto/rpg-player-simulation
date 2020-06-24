@@ -1,5 +1,10 @@
 public class Dead implements PlayerManager{
     String stateName = "Dead";
+
+    @Override
+    public void equipSpell(int position){
+        System.out.println("Anche se ci riuscissi... da morto... non so come potresti utilizzarle");
+    }
     @Override
     public String getStateName() {
         return stateName;

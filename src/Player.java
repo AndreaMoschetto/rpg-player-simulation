@@ -4,35 +4,39 @@ public class Player extends EventSubject{
     private Inventory inventory;
     private Shop shop;
 
-    private float maxHealth;
+    private float maxHealth = 500;
     private float currentHealth;
-    private float baseAttack;
+    private float baseAttack = 10;
     private float currentAttack;
-    private float attackMultiplyer;
-    private float baseResistence;
+    private float attackMultiplyer = 1;
+    private float baseResistence = 10;
     private float currentResistence;
-    private float resistenceMultiplyer;
-    private String spellName;
+    private float resistenceMultiplyer = 1;
+    private String equippedSpellName = "niente";
 
     private PlayerManager currentState;
 
     private Player(){
         super();
+        currentHealth = maxHealth;
+        currentAttack = baseAttack;
+        currentResistence = baseResistence;
         inventory = Inventory.getInstance();
         shop = Shop.getInstance();
-        setMode(new Normal());
     }
 
     public static Player getInstance(){
-        if(null == instance)
+        if(null == instance){
             instance = new Player();
+            instance.setMode(new Normal());
+        }
         return instance;
     }
 
-    public void setMode(PlayerManager newState){
-        updateAll();
+    public void setMode(PlayerManager newState){   
         currentState = newState;
-        currentState.onEnterState();
+        updateAll();
+        currentState.onEnterState();   
     }
 
     public String getStateName(){
@@ -45,9 +49,11 @@ public class Player extends EventSubject{
     public void buySpell(int spellKey){
         inventory.storeSpell(shop.getSpell(spellKey));
     }
-    public void equipSpell(int position){
+    public void equipSpellInInventory(int position){
         inventory.equipSpell(position);
-        updateAttackAmount();
+    }
+    public void equipSpell(int position){
+        currentState.equipSpell(position);
     }
     public void attack(){
         currentState.attack();
@@ -60,8 +66,11 @@ public class Player extends EventSubject{
         currentState.heal(amount);
     }
 
-    private void updateAttackAmount(){
+    public void updateAttackAmount(){
         currentAttack = baseAttack + inventory.getEquippedAmount();
+    }
+    public void updateEquippedSpellName(){
+        equippedSpellName = inventory.getEquippedSpellName();
     }
 
     public void printShopSpells(){
@@ -77,12 +86,12 @@ public class Player extends EventSubject{
             "STATISTICHE DI VALOROSO: \n" + 
             "Salute massima:\t\t" + maxHealth +
             "\nSalute attuale:\t\t" + currentHealth +
-            "\nAttacco di base:\t\t" + baseAttack +
-            "\nAttacco attuale:\t\t" + currentAttack +
-            "\nResistenza di base:\t\t" + baseResistence +
-            "\nResistenza attuale:\t\t" + currentResistence +
-            "\nSpell equipaggiata:\t\t" + inventory.getEquippedSpellName() +
-            "\nStato: \t\t" + currentState.getStateName()
+            "\nAttacco di base:\t" + baseAttack +
+            "\nAttacco attuale:\t" + currentAttack +
+            "\nResistenza di base:\t" + baseResistence +
+            "\nResistenza attuale:\t" + currentResistence +
+            "\nSpell equipaggiata:\t" + inventory.getEquippedSpellName() + " (DANNO: " + inventory.getEquippedAmount() + ")" +
+            "\nStato:\t\t\t" + currentState.getStateName().toUpperCase()
         );
     }
 
@@ -128,7 +137,7 @@ public class Player extends EventSubject{
     public float getMaxHealth(){
         return maxHealth;
     }
-    public String getSpellName(){
-        return spellName;
+    public String getEquippedSpellName(){
+        return equippedSpellName;
     }
 }

@@ -1,4 +1,5 @@
 public interface PlayerManager {
+    public void equipSpell(int position);
     public String getStateName();
     public void onEnterState();
     public void takeDamage(float amount);

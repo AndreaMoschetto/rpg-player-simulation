@@ -2,6 +2,14 @@ public class Punisher implements PlayerManager{
     private float attackNum = 0;
     private float maxAttackNum = 3;
     private String stateName = "Punisher";
+
+    @Override
+    public void equipSpell(int position){
+        Player.getInstance().equipSpellInInventory(position);
+        Player.getInstance().updateAttackAmount();
+        Player.getInstance().updateEquippedSpellName();
+    }
+
     @Override
     public String getStateName() {
         return stateName;
@@ -22,13 +30,10 @@ public class Punisher implements PlayerManager{
         float reducedHealth = 
             Player.getInstance().getCurrentHealth() - 
             amount + totalResistence;
-        System.out.println("A Valoroso vengono inflitti" + amount + "danni");
+        System.out.println("A Valoroso vengono inflitti " + amount + " danni");
         System.out.println("Ne subisce " + (amount - totalResistence));
         if(reducedHealth <= 0){
             kill();
-        }
-        else if(reducedHealth < (Player.getInstance().getMaxHealth()/3)){
-            Player.getInstance().setMode(new Berserker()); 
         }
         else{
             Player.getInstance().setCurrentHealth(reducedHealth);
@@ -38,7 +43,7 @@ public class Punisher implements PlayerManager{
 
     @Override
     public void heal(float amount) {
-        System.out.println("Valoroso si cura di:" + amount + "punti");
+        System.out.println("Valoroso si cura di: " + amount + " punti");
         float increasedHealth = Player.getInstance().getCurrentHealth() + amount;
         float maxHealth = Player.getInstance().getMaxHealth();
         if(increasedHealth > maxHealth)
@@ -50,16 +55,16 @@ public class Punisher implements PlayerManager{
 
     @Override
     public void attack() {
-        if(attackNum < maxAttackNum){
-            System.out.println(
-            "Valoroso punisce con: " + Player.getInstance().getSpellName()  +
+        
+        System.out.println(
+            "Valoroso punisce con: " + Player.getInstance().getEquippedSpellName()  +
             "\nInfligge: " + (Player.getInstance().getCurrentAttack() * Player.getInstance().getAttackMultiplyer()) + " danni."
-            );
-            attackNum++;
-        }
-        else{
+        );
+        attackNum++;
+
+        if(attackNum == maxAttackNum)
             kill();
-        }
+    
         return;
     }
 

@@ -1,9 +1,13 @@
 public class Normal implements PlayerManager{
     String stateName = "Normal";
-    Player player;
-    
-    public Normal(){
-        player = Player.getInstance();
+    Player player = Player.getInstance();
+
+
+    @Override
+    public void equipSpell(int position){
+        Player.getInstance().equipSpellInInventory(position);
+        Player.getInstance().updateAttackAmount();
+        Player.getInstance().updateEquippedSpellName();
     }
 
     @Override
@@ -13,10 +17,10 @@ public class Normal implements PlayerManager{
 
     @Override
     public void onEnterState(){
-        //float baseResistence = Player.getInstance().getBaseResistence();
-        // Player.getInstance().setCurrentResistence(baseResistence);
-        // Player.getInstance().setAttackMultiplyer(1);
-        // Player.getInstance().setResistenceMultiplyer(1);
+        float baseResistence = Player.getInstance().getBaseResistence();
+        Player.getInstance().setCurrentResistence(baseResistence);
+        Player.getInstance().setAttackMultiplyer(1);
+        Player.getInstance().setResistenceMultiplyer(1);
     }
 
     @Override
@@ -26,7 +30,7 @@ public class Normal implements PlayerManager{
         float reducedHealth = 
             Player.getInstance().getCurrentHealth() - 
             amount + totalResistence;
-        System.out.println("A Valoroso vengono inflitti" + amount + "danni");
+        System.out.println("A Valoroso vengono inflitti " + amount + " danni");
         System.out.println("Ne subisce " + (amount - totalResistence));
         if(reducedHealth <= 0){
             kill();
@@ -41,7 +45,7 @@ public class Normal implements PlayerManager{
 
     @Override
     public void heal(float amount) {
-        System.out.println("Valoroso si cura di:" + amount + "punti");
+        System.out.println("Valoroso si cura di: " + amount + " punti");
         float increasedHealth = Player.getInstance().getCurrentHealth() + amount;
         float maxHealth = Player.getInstance().getMaxHealth();
         if(increasedHealth > maxHealth)
@@ -53,7 +57,7 @@ public class Normal implements PlayerManager{
     @Override
     public void attack() {
         System.out.println(
-            "Valoroso attacca con: " + Player.getInstance().getSpellName()  +
+            "Valoroso attacca con: " + Player.getInstance().getEquippedSpellName()  +
             "\nInfligge: " + (Player.getInstance().getCurrentAttack() * Player.getInstance().getAttackMultiplyer()) + " danni."
             );
     }
