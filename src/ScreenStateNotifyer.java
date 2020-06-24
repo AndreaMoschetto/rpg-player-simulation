@@ -13,6 +13,7 @@ public class ScreenStateNotifyer implements EventObserver{
     public void update() {
         String stateName = Player.getInstance().getStateName();
         System.out.println("[NOTIFICA] Valoroso ha appena raggiunto lo stato: " + stateName);
+        System.out.println(Player.getInstance().getStateDescription());
     }
     
 }

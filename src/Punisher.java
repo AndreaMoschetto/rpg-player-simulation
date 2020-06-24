@@ -2,6 +2,9 @@ public class Punisher implements PlayerManager{
     private float attackNum = 0;
     private float maxAttackNum = 3;
     private String stateName = "Punisher";
+    private String description = 
+        "Il Talismano si rompe e ti dona la vita per altri tre attacchi. " +
+        "Attacco triplicato e resistenza dimezzata. VENDICATI";
 
     @Override
     public void equipSpell(int position){
@@ -14,6 +17,12 @@ public class Punisher implements PlayerManager{
     public String getStateName() {
         return stateName;
     }
+
+    @Override
+    public String getDescription(){
+        return description;
+    }
+
     @Override
     public void onEnterState(){
         float maxHealth = Player.getInstance().getMaxHealth();

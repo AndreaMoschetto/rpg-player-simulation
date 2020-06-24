@@ -1,5 +1,6 @@
 public class Dead implements PlayerManager{
-    String stateName = "Dead";
+    private String stateName = "Dead";
+    private String description = "La morte sopraggiunge. Nessuna azione e' ormai disponibile";
 
     @Override
     public void equipSpell(int position){
@@ -9,6 +10,12 @@ public class Dead implements PlayerManager{
     public String getStateName() {
         return stateName;
     }
+
+    @Override
+    public String getDescription(){
+        return description;
+    }
+
     @Override
     public void onEnterState(){
         return;

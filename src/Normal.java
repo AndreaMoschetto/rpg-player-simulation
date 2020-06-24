@@ -1,6 +1,6 @@
 public class Normal implements PlayerManager{
-    String stateName = "Normal";
-    Player player = Player.getInstance();
+    private String stateName = "Normal";
+    private String description = "Tutte le statistiche ai valori di base";
 
 
     @Override
@@ -13,6 +13,11 @@ public class Normal implements PlayerManager{
     @Override
     public String getStateName() {
         return stateName;
+    }
+
+    @Override
+    public String getDescription(){
+        return description;
     }
 
     @Override

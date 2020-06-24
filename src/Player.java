@@ -42,6 +42,11 @@ public class Player extends EventSubject{
     public String getStateName(){
         return currentState.getStateName();
     }
+
+    public String getStateDescription(){
+        return currentState.getDescription();
+    }
+
     public void punisherOn(){
         setMode(new Punisher());
     }
@@ -91,7 +96,8 @@ public class Player extends EventSubject{
             "\nResistenza di base:\t" + baseResistence +
             "\nResistenza attuale:\t" + currentResistence +
             "\nSpell equipaggiata:\t" + inventory.getEquippedSpellName() + " (DANNO: " + inventory.getEquippedAmount() + ")" +
-            "\nStato:\t\t\t" + currentState.getStateName().toUpperCase()
+            "\nStato:\t\t\t" + getStateName().toUpperCase() +
+            "\nDescrizione Stato:\t" + getStateDescription()
         );
     }
 

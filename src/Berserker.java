@@ -1,6 +1,8 @@
 public class Berserker implements PlayerManager{
-    String stateName = "Berserker";
-
+    private String stateName = "Berserker";
+    private String description = 
+        "Adesso sei un distruttore. DEVASTA OGNI COSA!!" +
+        " Attacco e Resistenza raddoppiati";
 
     @Override
     public void equipSpell(int position){
@@ -12,6 +14,11 @@ public class Berserker implements PlayerManager{
     @Override
     public String getStateName() {
         return stateName;
+    }
+    
+    @Override
+    public String getDescription(){
+        return description;
     }
 
     @Override
