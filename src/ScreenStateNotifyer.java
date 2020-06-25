@@ -1,7 +1,6 @@
 public class ScreenStateNotifyer implements EventObserver{
-    private static ScreenStateNotifyer instance;
+    private static ScreenStateNotifyer instance = null;
     private ScreenStateNotifyer(){
-        Player.getInstance().attach(this);
     }
 
     public static ScreenStateNotifyer getInstance(){
@@ -9,6 +8,11 @@ public class ScreenStateNotifyer implements EventObserver{
             instance = new ScreenStateNotifyer();
         return instance;
     }
+
+    public void init(){
+        Player.getInstance().attach(this);
+    }
+
     @Override
     public void update() {
         String stateName = Player.getInstance().getStateName();

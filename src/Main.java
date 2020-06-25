@@ -7,6 +7,7 @@ public class Main {
     private static ScreenStateNotifyer notifyer = ScreenStateNotifyer.getInstance();
 
     public static void main(String[] args) {
+        notifyer.init();
         printTitle();
         printShopMenu();
         printPlayerMenu();
