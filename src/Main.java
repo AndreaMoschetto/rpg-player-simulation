@@ -4,10 +4,10 @@ import java.io.InputStreamReader;
 
 public class Main {
     private static Player player = Player.getInstance();
-    private static ScreenStateNotifyer notifyer = ScreenStateNotifyer.getInstance();
+    private static ScreenStateNotifier notifier = ScreenStateNotifier.getInstance();
 
     public static void main(String[] args) {
-        notifyer.init();
+        notifier.init();
         printTitle();
         printShopMenu();
         printPlayerMenu();

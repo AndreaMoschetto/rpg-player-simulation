@@ -1,11 +1,11 @@
-public class ScreenStateNotifyer implements EventObserver{
-    private static ScreenStateNotifyer instance = null;
-    private ScreenStateNotifyer(){
+public class ScreenStateNotifier implements EventObserver{
+    private static ScreenStateNotifier instance = null;
+    private ScreenStateNotifier(){
     }
 
-    public static ScreenStateNotifyer getInstance(){
+    public static ScreenStateNotifier getInstance(){
         if(null == instance)
-            instance = new ScreenStateNotifyer();
+            instance = new ScreenStateNotifier();
         return instance;
     }
 
