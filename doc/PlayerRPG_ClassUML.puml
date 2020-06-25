@@ -1,0 +1,62 @@
+@startuml
+
+'START STYLE
+skinparam{
+    monochrome true
+}
+skinparam sequence{
+    participantBackgroundColor white
+}
+
+hide footbox
+'END STYLE
+
+title Activation of Talisman - Sequence UML
+
+participant "main" as main
+participant "p:Player" as p
+participant "pun:Punisher" as pun
+participant "d:Dead" as d
+participant "rt:ResurrectionTalisman" as rt
+participant "ber:Berseker" as ber
+
+activate main
+
+main -> p : takeDamage() 
+activate p
+
+p -> ber : takeDamage()
+activate ber
+
+ber -> p+ : setHealth()
+p -->> ber- 
+
+
+ber -> p+ : setMode()
+p -> d** : new()
+p -> p+ : updateAll()
+
+p -> rt : update()
+activate rt
+
+rt -> p+ : punisherOn()
+
+p -> p+ : setMode()
+
+p -> pun ** : new()
+p -->> p-
+p -->> rt-
+
+rt -->> p
+deactivate rt
+
+p -->> p-
+p -->> ber-
+
+ber -->> p 
+deactivate ber
+
+p -->> main 
+deactivate p
+
+@enduml
