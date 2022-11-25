@@ -1,5 +1,5 @@
 # Player_RPG
-A Software Engineering Project
+A Software Engineering project to test some design-patterns
 
 This software represents a portion of a RPG System.  
 In this project you can see some features such as:  
