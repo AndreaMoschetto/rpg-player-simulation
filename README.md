@@ -1,9 +1,10 @@
 # Player_RPG
-A Software Engineering course project to test design-patterns working togeter
+This is a Software Engineering Course project with the main purpose of making some design pattern work together.
+This software represents a portion of a RPG System playable directly on terminal.
 
-This software represents a portion of a RPG System.  
-In this project you can see some features such as:  
+## Features
+It includes some of the most common features that you can find in an RPG game:
 - Iventory system 
-- Shop system
-- Usable Items system
-- State changing system 
+- Shop
+- Usable Items 
+- State changing player
