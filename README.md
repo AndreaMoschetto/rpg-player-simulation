@@ -1,6 +1,5 @@
 # Player_RPG
-This is a Software Engineering Course project with the main purpose of making some design pattern work together.
-
+This is a Software Engineering Course project with the main purpose of making some design pattern work together.  
 This software represents a portion of a RPG System playable directly on terminal.
 
 ## Features
