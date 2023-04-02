@@ -8,6 +8,13 @@ It includes some of the most common features that you can find in an RPG game:
 - Shop
 - Usable Items 
 - State changing player
+- Event system
+
+## Involved design patterns
+- Singleton
+- Factory Method
+- State
+- Observer
 
 ## UML
 ![class-uml](doc/Player_RPG_ClassUML.png)
